@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, StyleSheet } from 'react-native';
 import TaskList from './TaskList';
 
 class Todo extends Component {
@@ -17,7 +17,9 @@ class Todo extends Component {
 
     render() {
         return (
-            <TaskList />
+            <TaskList 
+                todos={this.state.todos}
+            />
         );
     }
 }
