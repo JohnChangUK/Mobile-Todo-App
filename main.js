@@ -11,7 +11,9 @@ class Todo extends Component {
     }  
 
     render() {
-
+        return (
+            <Text>Digital Affect, Machine Learning</Text>
+            );
     }
 }
 
