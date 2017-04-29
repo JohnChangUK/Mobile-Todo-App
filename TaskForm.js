@@ -41,16 +41,29 @@ class TaskForm extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            task: ''
-        };
+    }
+// Updated value verytime the text value is changed
+    onChange(text) {
+    // this.task is a local instance variable
+        this.task=text;
+    }
+
+    onAddPressed() {
+    // this.task=text comes from onChange(text)
+        this.props.onAdd(this.task);
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <TextInput style={styles.input} />
-                    <TouchableHighlight style={styles.button}>
+                <TextInput 
+// Callback that is called when the text input's text changes. 
+// Changed text is passed as an argument to the callback handler.
+                    onChangeText={this.onChange.bind(this)}
+                    style={styles.input} />
+                    <TouchableHighlight 
+                        onPress={this.onAddPressed.bind(this)}
+                        style={styles.button}>
                         <Text style={styles.buttonText}>
                             Add
                         </Text>

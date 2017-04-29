@@ -28,7 +28,29 @@ class Todo extends Component {
     }
 
     onCancel() {
-        console.log('cancelled')
+        console.log('cancelled');
+        this.nav.pop();
+    }
+
+    onAdd(task) {
+        this.nav.pop();
+        this.state.todos.push({
+            task: task
+        });
+        this.setState({
+            todos: this.state.todos
+        });
+        console.log('This is the task: ' + task);
+    }
+
+    onDone(todo) {
+        console.log('Todo was completed: ' + todo.task);
+        const filteredTodos = this.state.todos.filter( (filterTodo) => {
+            return filterTodo !== todo;
+        });
+        this.setState({
+            todos: filteredTodos
+        });
     }
 
 // route = route being requested, nav = the navigator calling this function
@@ -36,12 +58,15 @@ class Todo extends Component {
         switch (route.name) {
             case 'taskform':
                 return (
-                    <TaskForm onCancel={this.onCancel.bind(this)}/>
+                    <TaskForm 
+                        onAdd={this.onAdd.bind(this)}
+                        onCancel={this.onCancel.bind(this)}/>
                 );
             default: 
                 return (
                 <TaskList
                     onAddStarted={this.onAddStarted.bind(this)}
+                    onDone={this.onDone.bind(this)}
                     todos={this.state.todos}
                 />
             ); 
@@ -57,7 +82,7 @@ class Todo extends Component {
             <Navigator
                 configureScene={this.configureScene}
         // TaskList is the default route as the navigator
-                initialRoute={{ name: 'tasklist', index: 0}}
+                initialRoute={{ name: 'tasklist ', index: 0}}
                 ref={( (nav) => {
                     this.nav = nav;
                 }) }
