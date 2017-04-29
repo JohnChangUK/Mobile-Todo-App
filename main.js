@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, Navigator, Text } from 'react-native';
+import { AppRegistry, Navigator } from 'react-native';
 import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
 class Todo extends Component {
     constructor(props, context) {
@@ -21,14 +22,21 @@ class Todo extends Component {
     }
 
     onAddStarted() {
-        console.log("ADd Started");
+        this.nav.push({
+            name: 'taskform'
+        });
     }
+
+    onCancel() {
+        console.log('cancelled')
+    }
+
 // route = route being requested, nav = the navigator calling this function
     renderScene(route, nav) {
         switch (route.name) {
             case 'taskform':
                 return (
-                    <Text>Add form comes here!</Text>
+                    <TaskForm onCancel={this.onCancel.bind(this)}/>
                 );
             default: 
                 return (
@@ -39,10 +47,16 @@ class Todo extends Component {
             ); 
         }
     }
+    
+    configureScene() {
+        return Navigator.SceneConfigs.FloatFromBottom;
+    }
 
     render() {
         return (
-            <Navigator 
+            <Navigator
+                configureScene={this.configureScene}
+        // TaskList is the default route as the navigator
                 initialRoute={{ name: 'tasklist', index: 0}}
                 ref={( (nav) => {
                     this.nav = nav;
