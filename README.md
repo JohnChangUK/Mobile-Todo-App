@@ -1,4 +1,4 @@
-## A Mobile Application which allows a user to make a Todolist, and has the freedom to add a new todo or complete a todo.
+## A Mobile Application which allows a user to make a Todolist, and has the option to add a new todo or complete a todo.
 
 ## Made in React Native
 
